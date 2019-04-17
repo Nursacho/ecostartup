@@ -1,0 +1,35 @@
+{% extends 'input-index.html' %}
+
+{% load static %}
+{% block content %}
+<div style="height: 13vh;"></div>
+<div class="container">
+
+  {% for object in object_list %}
+  <article class="one-post">
+    
+      <div class="post-info">
+        <a class="post-title" href="{% url 'blog:post-detail' object.id %}">{{ object.title }}</a>
+        <span class="date-muted">{{ object.date_posted|date:"F d, Y" }}</span>
+        
+      </div>
+      
+        <img class="content-img" src="{{ object.postimage_set.first.image.url }}"/> 
+        <p class="content-text">{{ object.content|truncatewords:30 }}</p>
+      
+    
+  </article>
+
+  {% endfor %}
+</div>
+<div style="height: 13vh;"></div>
+
+{% endblock content %}
+
+{% block admin-panel %}
+
+<div class="btn-group">
+    <a class="dropdown-item" href="{% url 'blog:post-create' %}">Post</a>
+</div>
+
+{% endblock %}
